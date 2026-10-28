@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Anual Interactivo 2027 - Colegio Montano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333333;
+        }
+
+        /* Color Palette Rules */
+        .bg-montano-primary { background-color: #1F3C88; }
+        .bg-montano-secondary { background-color: #3F72AF; }
+        .bg-montano-accent { background-color: #F2C94C; }
+        .text-montano-primary { color: #1F3C88; }
+        .text-montano-secondary { color: #3F72AF; }
+        .border-montano-primary { border-color: #1F3C88; }
+        .border-montano-secondary { border-color: #3F72AF; }
+
+        /* Custom Styles for Tabs and Animations */
+        .tab-btn {
+            transition: all 0.25s ease-in-out;
+            border-bottom: 4px solid transparent;
+        }
+
+        .tab-btn.active {
+            background-color: #F2C94C;
+            color: #1F3C88;
+            font-weight: 700;
+            border-bottom-color: #1F3C88;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background-color: #3F72AF;
+            color: #FFFFFF;
+        }
+
+        /* Custom styling to enforce strict prohibition of asterisks */
+        .emphasized-text {
+            font-style: italic;
+        }
+
+        /* Responsive Scrollbar for content areas */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3F72AF;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #1F3C88;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-100">
+
+    <!-- BARRA SUPERIOR INSTITUCIONAL -->
+    <header class="bg-montano-primary text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+            <!-- Logo & Title -->
+            <div class="flex items-center space-x-4">
+                <img src="https://admisiones.colegiomontano.edu.gt/assets/img/logo-cm-blanco.webp" 
+                     alt="Colegio Montano Logo" 
+                     class="h-12 w-auto object-contain"
+                     onerror="this.onerror=null; this.src='https://placehold.co/180x50/1F3C88/FFFFFF?text=Colegio+Montano';">
+                <div class="border-l border-blue-400 pl-4">
+                    <h1 class="text-lg md:text-xl font-bold leading-tight">Interactive Annual Plan</h1>
+                    <p class="text-xs text-yellow-300 font-medium"><i>Teacher's Digital Board</i></p>
+                </div>
+            </div>
+
+            <!-- Metadata Cards -->
+            <div class="flex flex-wrap items-center gap-2 text-xs md:text-sm">
+                <div class="bg-blue-900 bg-opacity-50 px-3 py-1.5 rounded-lg border border-blue-400/30">
+                    <span class="text-blue-200"><i>Course:</i></span> <span class="font-semibold text-white">Grammar</span>
+                </div>
+                <div class="bg-blue-900 bg-opacity-50 px-3 py-1.5 rounded-lg border border-blue-400/30">
+                    <span class="text-blue-200"><i>Grade:</i></span> <span class="font-semibold text-white">1st Grade (Elementary)</span>
+                </div>
+                <div class="bg-blue-900 bg-opacity-50 px-3 py-1.5 rounded-lg border border-blue-400/30">
+                    <span class="text-blue-200"><i>Teacher:</i></span> <span class="font-semibold text-white">Nicole De León</span>
+                </div>
+                <div class="bg-blue-900 bg-opacity-50 px-3 py-1.5 rounded-lg border border-blue-400/30">
+                    <span class="text-blue-200"><i>School Year:</i></span> <span class="font-semibold text-white">2027</span>
+                </div>
+
+                <!-- Boton Pantalla Completa -->
+                <button onclick="toggleFullScreen()" 
+                        class="ml-2 bg-montano-accent text-montano-primary font-bold px-3 py-1.5 rounded-lg shadow hover:bg-yellow-400 transition-colors flex items-center gap-1.5 text-xs md:text-sm">
+                    <span>🖥️</span> <span><i>Full Screen</i></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN HORIZONTAL POR PESTAÑAS -->
+    <nav class="bg-montano-secondary shadow-md sticky top-[72px] z-40 overflow-x-auto custom-scrollbar">
+        <div class="max-w-7xl mx-auto flex whitespace-nowrap px-2">
+            <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active px-4 py-3 text-sm text-white font-medium focus:outline-none">
+                I) Descriptor
+            </button>
+            <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn px-4 py-3 text-sm text-white font-medium focus:outline-none">
+                II) Objectives
+            </button>
+            <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn px-4 py-3 text-sm text-white font-medium focus:outline-none">
+                III) Competencies
+            </button>
+            <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn px-4 py-3 text-sm text-white font-medium focus:outline-none">
+                IV) Indicators
+            </button>
+            <button onclick="switchTab('tab5')" id="btn-tab5" class="tab-btn px-4 py-3 text-sm text-white font-medium focus:outline-none">
+                V) Teaching Methods
+            </button>
+            <button onclick="switchTab('tab6')" id="btn-tab6" class="tab-btn px-4 py-3 text-sm text-white font-medium focus:outline-none">
+                VI) Bibliography
+            </button>
+            <button onclick="switchTab('tab7')" id="btn-tab7" class="tab-btn px-4 py-3 text-sm text-white font-medium focus:outline-none">
+                VII) Contents
+            </button>
+        </div>
+    </nav>
+
+    <!-- ÁREA DE CONTENIDO DE LA PIZARRA -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6">
+
+        <!-- PESTAÑA 1: DESCRIPTOR DEL CURSO -->
+        <section id="tab1" class="tab-content block space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-md border-l-8 border-montano-primary">
+                <h2 class="text-xl md:text-2xl font-bold text-montano-primary mb-4"><i>I) Course Description</i></h2>
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 text-gray-700 leading-relaxed text-justify space-y-3">
+                    <p>
+                        This course provides an introduction to the basic elements of English grammar and writing skills. The course also includes active vocabulary that provides students with the necessary language to answer the topic questions that are presented and practiced. Many activities are set up in different ways, according to the needs of students and teachers.
+                    </p>
+                    <p class="text-sm text-montano-secondary">
+                        <i>Area Focus: Develop key competencies for the gradual acquisition of English language skills through structured and adaptive learning.</i>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 2: OBJETIVOS GENERALES -->
+        <section id="tab2" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-md border-l-8 border-montano-primary">
+                <h2 class="text-xl md:text-2xl font-bold text-montano-primary mb-6"><i>II) General Objectives</i></h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block bg-montano-primary text-white text-xs px-2.5 py-1 rounded-full font-semibold mb-3"><i>Objective 1</i></span>
+                            <h3 class="text-base font-semibold text-montano-primary mb-2"><i>Recognition & Identification</i></h3>
+                            <p class="text-sm text-gray-700">Students will be able to recognize and identify vocabulary words within the context of a theme.</p>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block bg-montano-primary text-white text-xs px-2.5 py-1 rounded-full font-semibold mb-3"><i>Objective 2</i></span>
+                            <h3 class="text-base font-semibold text-montano-primary mb-2"><i>Structure & Application</i></h3>
+                            <p class="text-sm text-gray-700">Students will be able to use words with the right structure and apply vocabulary words.</p>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block bg-montano-primary text-white text-xs px-2.5 py-1 rounded-full font-semibold mb-3"><i>Objective 3</i></span>
+                            <h3 class="text-base font-semibold text-montano-primary mb-2"><i>Expression & Introduction</i></h3>
+                            <p class="text-sm text-gray-700">Students will be able to tell self-experiences, recognize new words, give their opinion, and introduce a new topic.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 3: COMPETENCIAS -->
+        <section id="tab3" class="tab-content hidden space-y-6">
+            <!-- Competencias Académicas -->
+            <div class="bg-white rounded-xl p-6 shadow-md border-l-8 border-montano-primary">
+                <h2 class="text-xl md:text-2xl font-bold text-montano-primary mb-4"><i>III) Academic Area Competencies</i></h2>
+                <div class="bg-blue-50/50 p-4 rounded-lg border border-blue-100 space-y-3 text-sm text-gray-700">
+                    <p>
+                        Students develop the fundamental skills for understanding and using English in basic communicative contexts. They demonstrate active listening by following simple instructions and recognizing sounds that differ from their native language.
+                    </p>
+                    <p>
+                        Learners express themselves through clear pronunciation of familiar words, short phrases, and everyday expressions, supported by appropriate verbal and non-verbal communication.
+                    </p>
+                    <p class="bg-white p-3 rounded border border-blue-200 text-montano-primary font-medium">
+                        <i>They begin to read and respond to simple written commands, showing comprehension through actions and responses. These competencies foster the gradual development of oral and written communication skills in English at an introductory level.</i>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Competencias Marco Institucionales (Colegio Montano) -->
+            <div class="bg-white rounded-xl p-6 shadow-md border-l-8 border-montano-accent">
+                <h2 class="text-xl md:text-2xl font-bold text-montano-primary mb-2"><i>CM Competencies & Institutional Integration</i></h2>
+                <p class="text-sm text-gray-600 mb-6"><i>Transversal institutional competencies integrated into the learning process:</i></p>
+                
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary">
+                        <p class="font-semibold text-sm text-montano-primary"><i>1. Critical Thinking and Problem Solving</i></p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary">
+                        <p class="font-semibold text-sm text-montano-primary"><i>2. Collaboration and Teamwork</i></p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary">
+                        <p class="font-semibold text-sm text-montano-primary"><i>3. Digital Competencies</i></p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary">
+                        <p class="font-semibold text-sm text-montano-primary"><i>4. Effective Communication</i></p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary">
+                        <p class="font-semibold text-sm text-montano-primary"><i>5. Creativity and Innovation</i></p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary">
+                        <p class="font-semibold text-sm text-montano-primary"><i>6. Autonomous Learning and Adaptability</i></p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary">
+                        <p class="font-semibold text-sm text-montano-primary"><i>7. Global and Cultural Awareness</i></p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary">
+                        <p class="font-semibold text-sm text-montano-primary"><i>8. Ethics and Digital Citizenship</i></p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary">
+                        <p class="font-semibold text-sm text-montano-primary"><i>9. Emotional Management and Resilience</i></p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary">
+                        <p class="font-semibold text-sm text-montano-primary"><i>10. Ecological Awareness and Sustainability</i></p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-montano-secondary sm:col-span-2 lg:col-span-1">
+                        <p class="font-semibold text-sm text-montano-primary"><i>11. Leadership Roles Performance</i></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 4: INDICADORES DE LOGRO -->
+        <section id="tab4" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-md border-l-8 border-montano-primary">
+                <h2 class="text-xl md:text-2xl font-bold text-montano-primary mb-4"><i>IV) Achievement Indicators</i></h2>
+                <div class="grid gap-3 text-sm">
+                    <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="text-montano-secondary text-lg">✔</span>
+                        <p class="text-gray-700">Follows simple oral instructions given by the teacher in English.</p>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="text-montano-secondary text-lg">✔</span>
+                        <p class="text-gray-700">Recognizes and reproduces basic sounds and words in English with acceptable pronunciation.</p>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="text-montano-secondary text-lg">✔</span>
+                        <p class="text-gray-700">Uses common greetings and classroom expressions appropriately in everyday interactions.</p>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="text-montano-secondary text-lg">✔</span>
+                        <p class="text-gray-700">Identifies familiar vocabulary through visual aids, songs, and classroom activities.</p>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="text-montano-secondary text-lg">✔</span>
+                        <p class="text-gray-700">Demonstrates understanding of simple spoken phrases through physical response or action.</p>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="text-montano-secondary text-lg">✔</span>
+                        <p class="text-gray-700">Reads and responds to short written commands and words related to familiar topics.</p>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="text-montano-secondary text-lg">✔</span>
+                        <p class="text-gray-700">Combines words or short phrases to form simple and meaningful sentences orally.</p>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="text-montano-secondary text-lg">✔</span>
+                        <p class="text-gray-700">Uses gestures and facial expressions to support communication when speaking or listening in English.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 5: MÉTODOS DIDÁCTICOS -->
+        <section id="tab5" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-md border-l-8 border-montano-primary">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold text-montano-primary"><i>V) Institutional Teaching Methods</i></h2>
+                    <span class="bg-montano-accent text-montano-primary font-bold text-xs px-3 py-1 rounded-full"><i>Active-Collaborative Model</i></span>
+                </div>
+
+                <!-- Estructura Período Doble -->
+                <h3 class="text-lg font-bold text-montano-secondary mb-4 border-b pb-2"><i>Double Period Structure (70 Minutes)</i></h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-montano-primary text-sm"><i>1. Engaging Warm-up</i></span>
+                            <span class="text-xs bg-blue-200 text-blue-800 px-2 py-0.5 rounded"><i>Start</i></span>
+                        </div>
+                        <p class="text-xs text-gray-600">Prior knowledge activation through educational games, energizers, and brainstorming.</p>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-montano-primary text-sm"><i>2. Individual Work</i></span>
+                            <span class="text-xs bg-blue-200 text-blue-800 px-2 py-0.5 rounded"><i>Development</i></span>
+                        </div>
+                        <p class="text-xs text-gray-600">Fostering personal strengths, technical skills, and individual student talents.</p>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-montano-primary text-sm"><i>3. Teamwork</i></span>
+                            <span class="text-xs bg-blue-200 text-blue-800 px-2 py-0.5 rounded"><i>Synergy</i></span>
+                        </div>
+                        <p class="text-xs text-gray-600">Collaborative interaction with assigned roles under the principle: <i>"All for one and one for all"</i>.</p>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-montano-primary text-sm"><i>4. Plenary & Reflection</i></span>
+                            <span class="text-xs bg-blue-200 text-blue-800 px-2 py-0.5 rounded"><i>Closure</i></span>
+                        </div>
+                        <p class="text-xs text-gray-600">Public presentation, Socratic dialogue, and learning consolidation.</p>
+                    </div>
+                </div>
+
+                <!-- Metodologías Clave -->
+                <h3 class="text-lg font-bold text-montano-secondary mb-4 border-b pb-2"><i>Key Methodologies & Pedagogical Approaches</i></h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-montano-primary text-sm mb-1"><i>Project-Based Learning (PBL) & Case Studies</i></h4>
+                        <p class="text-xs text-gray-600">Utilizing real-life scenarios and collaborative interactions to enhance problem-solving and team synergy.</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-montano-primary text-sm mb-1"><i>Constructivism & Flipped Classroom</i></h4>
+                        <p class="text-xs text-gray-600">Empowering students to take ownership of their learning through pre-class reading and proactive reflection.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 6: BIBLIOGRAFÍA -->
+        <section id="tab6" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-md border-l-8 border-montano-primary">
+                <h2 class="text-xl md:text-2xl font-bold text-montano-primary mb-6"><i>VI) Bibliography & Learning Resources</i></h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-5 bg-blue-50 rounded-xl border border-blue-200">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-3xl">📚</span>
+                            <div>
+                                <h3 class="font-bold text-montano-primary text-base"><i>Main Textbook</i></h3>
+                                <p class="text-xs text-gray-500"><i>National Geographic Learning</i></p>
+                            </div>
+                        </div>
+                        <p class="text-sm font-semibold text-gray-800">Our World Second Edition - Level 1</p>
+                        <p class="text-xs text-gray-600 mt-2"><i>Includes Student Book and Workbook for classroom instruction and self-study.</i></p>
+                    </div>
+
+                    <div class="p-5 bg-blue-50 rounded-xl border border-blue-200">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-3xl">🌐</span>
+                            <div>
+                                <h3 class="font-bold text-montano-primary text-base"><i>Digital Platform</i></h3>
+                                <p class="text-xs text-gray-500"><i>ELT NGL Portal</i></p>
+                            </div>
+                        </div>
+                        <p class="text-sm font-semibold text-gray-800">
+                            <a href="https://learn.eltngl.com" target="_blank" class="text-montano-secondary underline hover:text-montano-primary">https://learn.eltngl.com</a>
+                        </p>
+                        <p class="text-xs text-gray-600 mt-2"><i>Interactive digital resources, audio files, and supplementary practice activities.</i></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 7: CONTENIDOS Y PÁGINAS LIBROS -->
+        <section id="tab7" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-md border-l-8 border-montano-primary">
+                <div class="mb-6 flex flex-wrap justify-between items-center gap-4">
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-bold text-montano-primary"><i>VII) Syllabus & Sequence of Contents</i></h2>
+                        <p class="text-xs text-gray-500 mt-1"><i>Breakdown by Units specifying assigned Student Book (SB) and Workbook (WB) pages</i></p>
+                    </div>
+                </div>
+
+                <!-- TABLAS DE CONTENIDOS POR UNIDAD -->
+                <div class="space-y-8">
+                    
+                    <!-- UNIDAD 1 -->
+                    <div class="overflow-hidden border border-gray-200 rounded-xl shadow-sm">
+                        <div class="bg-montano-primary text-white px-4 py-2.5 flex justify-between items-center">
+                            <h3 class="font-bold text-sm md:text-base"><i>UNIT I</i></h3>
+                            <span class="text-xs bg-montano-accent text-montano-primary font-bold px-2.5 py-0.5 rounded-full"><i>Term I</i></span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs md:text-sm">
+                                <thead class="bg-blue-50 text-montano-primary uppercase font-bold border-b border-gray-200">
+                                    <tr>
+                                        <th class="p-3"><i>Grammar Content</i></th>
+                                        <th class="p-3 text-center w-32"><i>Student Book (SB)</i></th>
+                                        <th class="p-3 text-center w-32"><i>Workbook (WB)</i></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Yes/No questions with it's</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Pages 16, 17</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 7, 8</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">What and How many</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Page 19</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 10, 11</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">To be: is, are</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Pages 32, 33</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 19, 20</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Where and in or on</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Page 35</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 22, 23</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">To have</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Pages 48, 49</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 31, 32</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">He/She and questions with who</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Page 51</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 34, 35</td>
+                                    </tr>
+                                    <tr class="bg-yellow-50 hover:bg-yellow-100">
+                                        <td class="p-3 font-bold text-montano-primary">Review Units 1 to 3</td>
+                                        <td class="p-3 text-center font-semibold text-gray-500">---</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 40, 41</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- UNIDAD 2 -->
+                    <div class="overflow-hidden border border-gray-200 rounded-xl shadow-sm">
+                        <div class="bg-montano-primary text-white px-4 py-2.5 flex justify-between items-center">
+                            <h3 class="font-bold text-sm md:text-base"><i>UNIT II</i></h3>
+                            <span class="text-xs bg-montano-accent text-montano-primary font-bold px-2.5 py-0.5 rounded-full"><i>Term II</i></span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs md:text-sm">
+                                <thead class="bg-blue-50 text-montano-primary uppercase font-bold border-b border-gray-200">
+                                    <tr>
+                                        <th class="p-3"><i>Grammar Content</i></th>
+                                        <th class="p-3 text-center w-32"><i>Student Book (SB)</i></th>
+                                        <th class="p-3 text-center w-32"><i>Workbook (WB)</i></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Yes/No questions with Is there?</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Pages 68, 69</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 45, 46</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Present progressive: He/She is + verb-ing</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Page 71</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 48, 49</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Present progressive: am/are/is + verb-ing</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Pages 84, 85</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 47, 58</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Questions with that and those</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Page 87</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 60, 61</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- UNIDAD 3 -->
+                    <div class="overflow-hidden border border-gray-200 rounded-xl shadow-sm">
+                        <div class="bg-montano-primary text-white px-4 py-2.5 flex justify-between items-center">
+                            <h3 class="font-bold text-sm md:text-base"><i>UNIT III</i></h3>
+                            <span class="text-xs bg-montano-accent text-montano-primary font-bold px-2.5 py-0.5 rounded-full"><i>Term III</i></span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs md:text-sm">
+                                <thead class="bg-blue-50 text-montano-primary uppercase font-bold border-b border-gray-200">
+                                    <tr>
+                                        <th class="p-3"><i>Grammar Content</i></th>
+                                        <th class="p-3 text-center w-32"><i>Student Book (SB)</i></th>
+                                        <th class="p-3 text-center w-32"><i>Workbook (WB)</i></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Simple present of want: I/you/he, she</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Pages 100, 101</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 69, 70</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Questions with this and these</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Page 103</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 72, 73</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Possessive adjectives</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Pages 120, 121</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 83, 84</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Ability with can</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Page 123</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 86, 87</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- UNIDAD 4 -->
+                    <div class="overflow-hidden border border-gray-200 rounded-xl shadow-sm">
+                        <div class="bg-montano-primary text-white px-4 py-2.5 flex justify-between items-center">
+                            <h3 class="font-bold text-sm md:text-base"><i>UNIT IV</i></h3>
+                            <span class="text-xs bg-montano-accent text-montano-primary font-bold px-2.5 py-0.5 rounded-full"><i>Term IV</i></span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs md:text-sm">
+                                <thead class="bg-blue-50 text-montano-primary uppercase font-bold border-b border-gray-200">
+                                    <tr>
+                                        <th class="p-3"><i>Grammar Content</i></th>
+                                        <th class="p-3 text-center w-32"><i>Student Book (SB)</i></th>
+                                        <th class="p-3 text-center w-32"><i>Workbook (WB)</i></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Like with count and noncount nouns</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Pages 136, 137</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 95, 96</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Articles a/an</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Page 139</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 98, 99</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Present progressive: they are + verb-ing</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Pages 152, 153</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 107, 108</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 font-medium text-gray-800">Want + infinitive</td>
+                                        <td class="p-3 text-center font-bold text-montano-secondary">Page 155</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 110, 111</td>
+                                    </tr>
+                                    <tr class="bg-yellow-50 hover:bg-yellow-100">
+                                        <td class="p-3 font-bold text-montano-primary">Review Units 8 to 9</td>
+                                        <td class="p-3 text-center font-semibold text-gray-500">---</td>
+                                        <td class="p-3 text-center font-bold text-montano-primary">Pages 116, 117</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-montano-primary text-white text-center py-4 text-xs mt-auto">
+        <p><i>Colegio Montano &copy; 2027 - Developing competencies to succeed.</i></p>
+    </footer>
+
+    <!-- LÓGICA INTERACTIVA JS -->
+    <script>
+        // Función para cambiar de pestaña
+        function switchTab(tabId) {
+            // Ocultar todas las pestañas
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            // Desactivar todos los botones
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // Mostrar la pestaña seleccionada
+            const selectedTab = document.getElementById(tabId);
+            if(selectedTab) {
+                selectedTab.classList.remove('hidden');
+            }
+
+            // Activar el botón correspondiente
+            const selectedBtn = document.getElementById('btn-' + tabId);
+            if(selectedBtn) {
+                selectedBtn.classList.add('active');
+            }
+        }
+
+        // Función para activar Modo Pantalla Completa
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error at enabling full-screen mode: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
